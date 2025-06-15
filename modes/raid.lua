@@ -1,0 +1,1 @@
+-- Comportamiento en modo banda

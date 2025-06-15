@@ -1,0 +1,1 @@
+-- Control de sliders individuales por marco

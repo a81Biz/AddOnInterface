@@ -1,0 +1,9 @@
+## Interface: 11400
+## Title: EsteticaPlusClassic
+## Notes: AddOn para personalizar la UI
+## Author: Alberto
+## Version: 1.0
+
+core.lua
+config_panel.lua
+mover.lua
