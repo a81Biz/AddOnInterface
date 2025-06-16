@@ -1,1 +1,1 @@
--- Comportamiento en modo un jugador
+-- Solo mode logic (placeholder)

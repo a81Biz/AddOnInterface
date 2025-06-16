@@ -1,43 +1,32 @@
-EsteticaPlusClassic = {}
-local addonName = ...
+EsteticaPlusClassic = EsteticaPlusClassic or {}
+EsteticaPlus = EsteticaPlus or {}
+EsteticaPlus.frames = {}
+EsteticaPlus.activo = false
+EsteticaPlus.moverActivo = nil
 
--- Referencia global al panel (puede estar en otro archivo)
-local configPanel = EsteticaPlus_ConfigPanel
+local function cargarFrames()
+  local cargar = {
+    "frames/player.lua",
+    "frames/target.lua"
+    -- Agregar más aquí conforme avancen
+  }
 
--- Crear el ícono manual flotante en el minimapa
-local minimapButton = CreateFrame("Button", "EsteticaPlusMinimapButton", Minimap)
-minimapButton:SetSize(32, 32)
-minimapButton:SetFrameStrata("MEDIUM")
-minimapButton:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", 0, -5)
+  for _, path in ipairs(cargar) do
+    RunScript('LoadAddOn("' .. path .. '")')
+  end
+end
 
--- Textura personalizada del ícono
-minimapButton.texture = minimapButton:CreateTexture(nil, "BACKGROUND")
-minimapButton.texture:SetTexture("Interface\\AddOns\\EsteticaPlusClassic\\icon.tga")
-minimapButton.texture:SetAllPoints(minimapButton)
-
--- Permitir moverlo
-minimapButton:SetMovable(true)
-minimapButton:EnableMouse(true)
-minimapButton:RegisterForDrag("LeftButton")
-minimapButton:SetScript("OnDragStart", minimapButton.StartMoving)
-minimapButton:SetScript("OnDragStop", minimapButton.StopMovingOrSizing)
-
--- Abrir el panel con clic izquierdo
-minimapButton:SetScript("OnClick", function(_, button)
-    if button == "LeftButton" then
-        if configPanel:IsShown() then
-            configPanel:Hide()
-        else
-            configPanel:Show()
-        end
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(_, event, arg1)
+  if arg1 == "EsteticaPlusClassic" then
+    if not EsteticaPlusDB then
+      EsteticaPlusDB = {}
     end
-end)
 
--- Tooltip simple
-minimapButton:SetScript("OnEnter", function(self)
-    GameTooltip:SetOwner(self, "ANCHOR_LEFT")
-    GameTooltip:AddLine("Estética+")
-    GameTooltip:AddLine("Clic izquierdo para abrir configuración", 1, 1, 1)
-    GameTooltip:Show()
+    -- Cargar los módulos directamente
+    cargarFrames()
+
+    print("Estética+ Classic cargado correctamente.")
+  end
 end)
-minimapButton:SetScript("OnLeave", function() GameTooltip:Hide() end)

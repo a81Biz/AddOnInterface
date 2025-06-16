@@ -1,9 +1,25 @@
-## Interface: 11400
-## Title: EsteticaPlusClassic
-## Notes: AddOn para personalizar la UI
+## Interface: 11403
+## Title: Estética+ Classic
+## Notes: Personalización visual modular para la interfaz de WoW Classic
 ## Author: Alberto
-## Version: 1.0
+## Version: 1.0.0
+## SavedVariables: EsteticaPlusDB
+
 
 core.lua
 config_panel.lua
 mover.lua
+edicionIndividual.lua
+
+
+
+frames/player.lua
+frames/target.lua
+frames/buffs.lua
+frames/debuffs.lua
+frames/chat.lua
+frames/multibars.lua
+
+modes/solo.lua
+modes/group.lua
+modes/raid.lua

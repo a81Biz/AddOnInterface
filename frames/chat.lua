@@ -1,1 +1,1 @@
--- Configuración y lógica para ChatFrame
+-- Chat frame custom logic (placeholder)

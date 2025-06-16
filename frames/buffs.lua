@@ -1,1 +1,1 @@
--- Configuración y lógica para BuffFrame
+-- Buff frame custom logic (placeholder)

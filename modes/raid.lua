@@ -1,1 +1,1 @@
--- Comportamiento en modo banda
+-- Raid mode logic (placeholder)
