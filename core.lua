@@ -103,36 +103,40 @@ function EPC:ToggleEditMode()
         print("|cff00ffcc[Config] Modo Edición Activado|r")
 
         -- Mostrar marcos verdes alrededor de los unit frames
-        for _, frame in pairs({ 
-            EPC.modules.PlayerFrame and EPC.modules.PlayerFrame.playerFrame,
-            EPC.modules.TargetFrame and EPC.modules.TargetFrame.targetFrame,
-            EPC.modules.PetFrame and EPC.modules.PetFrame.petFrame
+        for _, frameRef in pairs({ 
+            EPC.modules.PlayerFrame and EPC.modules.PlayerFrame.playerFrame, 
+            EPC.modules.TargetFrame and EPC.modules.TargetFrame.targetFrame, 
+            EPC.modules.PetFrame and EPC.modules.PetFrame.petFrame 
         }) do
 
-            if frame then
+            if frameRef then
+                local frame = frameRef
+
                 if not frame.showEditBox then
-                    -- Crear el marco con BackdropTemplate y como hijo de UIParent
+                    -- Crear el marco con BackdropTemplate
                     frame.showEditBox = CreateFrame("Frame", nil, UIParent, "BackdropTemplate")
                     frame.showEditBox:SetFrameStrata("TOOLTIP")
                     frame.showEditBox:SetSize(frame:GetWidth(), frame:GetHeight())
                     frame.showEditBox:SetPoint("CENTER", frame, "CENTER")
+
+                    -- Comprobar si SetBackdrop está disponible
+                    if frame.showEditBox.SetBackdrop then
+                        frame.showEditBox:SetBackdrop({
+                            bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
+                            edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+                            tile = true, tileSize = 16, edgeSize = 16,
+                            insets = { left = 4, right = 4, top = 4, bottom = 4 }
+                        })
+                        frame.showEditBox:SetBackdropColor(0, 0, 0, 0) -- Fondo transparente
+                        frame.showEditBox:SetBackdropBorderColor(0, 1, 0, 1) -- Borde verde
+                    else
+                        print("|cffff0000[ERROR] No se pudo aplicar SetBackdrop en el marco|r")
+                    end
                 end
 
-                -- Solo llamar a SetBackdrop si está disponible
-                if frame.showEditBox.SetBackdrop then
-                    frame.showEditBox:SetBackdrop({
-                        bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-                        edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-                        tile = true, tileSize = 16, edgeSize = 16,
-                        insets = { left = 4, right = 4, top = 4, bottom = 4 }
-                    })
-                    frame.showEditBox:SetBackdropColor(0, 0, 0, 0) -- Transparente
-                    frame.showEditBox:SetBackdropBorderColor(0, 1, 0, 1) -- Verde
-                else
-                    print("|cffff0000[ERROR] SetBackdrop no soportado en este entorno|r")
+                if frame.showEditBox then
+                    frame.showEditBox:Show()
                 end
-
-                frame.showEditBox:Show()
             end
         end
 
@@ -140,14 +144,14 @@ function EPC:ToggleEditMode()
         print("|cff00ffcc[Config] Modo Edición Desactivado|r")
 
         -- Ocultar marcos verdes
-        for _, frame in pairs({ 
-            EPC.modules.PlayerFrame and EPC.modules.PlayerFrame.playerFrame,
-            EPC.modules.TargetFrame and EPC.modules.TargetFrame.targetFrame,
-            EPC.modules.PetFrame and EPC.modules.PetFrame.petFrame
+        for _, frameRef in pairs({ 
+            EPC.modules.PlayerFrame and EPC.modules.PlayerFrame.playerFrame, 
+            EPC.modules.TargetFrame and EPC.modules.TargetFrame.targetFrame, 
+            EPC.modules.PetFrame and EPC.modules.PetFrame.petFrame 
         }) do
 
-            if frame and frame.showEditBox then
-                frame.showEditBox:Hide()
+            if frameRef and frameRef.showEditBox then
+                frameRef.showEditBox:Hide()
             end
         end
     end
