@@ -1,25 +1,12 @@
 ## Interface: 11403
-## Title: Estética+ Classic
-## Notes: Personalización visual modular para la interfaz de WoW Classic
-## Author: Alberto
+## Title: Estética Plus Classic
+## Notes: Personaliza tus marcos de unidad |nPersonalizados y ajustables
+## Author: @TuNombre
 ## Version: 1.0.0
-## SavedVariables: EsteticaPlusDB
-
+## SavedVariables: EsteticaPlusClassicDB
 
 core.lua
-config_panel.lua
-mover.lua
-edicionIndividual.lua
-
-
-
-frames/player.lua
-frames/target.lua
-frames/buffs.lua
-frames/debuffs.lua
-frames/chat.lua
-frames/multibars.lua
-
-modes/solo.lua
-modes/group.lua
-modes/raid.lua
+modules/unitframe.lua
+modules/mover.lua
+modules/config_panel.lua
+modules/edicionIndividual.lua

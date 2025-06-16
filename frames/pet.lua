@@ -1,19 +1,18 @@
 local EPC = _G["EsteticaPlusClassic"]
 
-EPC.modules.PlayerFrame = {}
+EPC.modules.PetFrame = {}
 
-function EPC.modules.PlayerFrame:Initialize()
-    print("[EPC] Iniciando marco del jugador...")
+function EPC.modules.PetFrame:Initialize()
+    print("[EPC] Iniciando marco de la mascota...")
 
-    self:CreatePlayerFrame()
+    self:CreatePetFrame()
 end
 
-function EPC.modules.PlayerFrame:CreatePlayerFrame()
-    local frame = CreateFrame("Frame", "EPC_PlayerFrame", UIParent)
-    frame:SetSize(200, 40)
-    frame:SetPoint("CENTER", UIParent, "CENTER", -250, 0)
+function EPC.modules.PetFrame:CreatePetFrame()
+    local frame = CreateFrame("Frame", "EPC_PetFrame", UIParent)
+    frame:SetSize(150, 30)
+    frame:SetPoint("CENTER", UIParent, "CENTER", -250, -50)
 
-    -- Fondo del marco
     frame:SetBackdrop({
         bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
         edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
@@ -22,7 +21,6 @@ function EPC.modules.PlayerFrame:CreatePlayerFrame()
     })
     frame:SetBackdropColor(0, 0, 0, 0.8)
 
-    -- Barra de salud
     local healthBar = CreateFrame("StatusBar", nil, frame)
     healthBar:SetAllPoints(frame)
     healthBar:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
@@ -30,19 +28,16 @@ function EPC.modules.PlayerFrame:CreatePlayerFrame()
     healthBar:SetValue(100)
     healthBar:SetStatusBarColor(0, 1, 0)
 
-    -- Texto del nombre
     local nameText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     nameText:SetPoint("LEFT", frame, "LEFT", 5, 0)
-    nameText:SetText("Jugador")
+    nameText:SetText("Mascota")
 
-    -- Texto de vida
     local healthText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     healthText:SetPoint("RIGHT", frame, "RIGHT", -5, 0)
     healthText:SetText("100%")
 
-    -- Guardamos referencias
-    self.playerFrame = frame
-    self.playerHealthBar = healthBar
-    self.playerNameText = nameText
-    self.playerHealthText = healthText
+    self.petFrame = frame
+    self.petHealthBar = healthBar
+    self.petNameText = nameText
+    self.petHealthText = healthText
 end
