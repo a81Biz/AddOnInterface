@@ -6,7 +6,8 @@
 ## SavedVariables: EsteticaPlusClassicDB
 
 core.lua
-modules/unitframe.lua
+modules/minimap_button.lua
+frames/player.lua
 modules/mover.lua
-modules/config_panel.lua
 modules/edicionIndividual.lua
+modules/config_panel.lua
